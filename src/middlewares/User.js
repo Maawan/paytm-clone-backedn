@@ -20,7 +20,9 @@ exports.isLoggedIn = Wrapper(async function(req , res , next){
         const decoded = jwt.verify(token , process.env.JWT_SECRET);
         // console.log(decoded.email + " weoifn");
         // console.log("Ok...");
+        console.log("email found to be " + decoded.email)
         const user = await User.findOne({email : decoded.email})
+        console.log("User found " , user);
         if(!user){
             return res.status(401).json({
                 message : "Invalid token"
